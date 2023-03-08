@@ -24,7 +24,7 @@ provider:
   # Use these variables in the functions and resouorces section below. For example, 
   # ${self:provider.environment.ATTACHMENT_S3_BUCKET}
   environment:
-    TODOS_TABLE: Todo-${self:provider.stage}
+    TODOS_TABLE: Todon-${self:provider.stage}
     TODOS_CREATED_AT_INDEX: TodoIdIndex
     ATTACHMENT_S3_BUCKET: serverless-seyi4-todo-images-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
@@ -174,9 +174,13 @@ resources:
         AttributeDefinitions:
           - AttributeName: todoId
             AttributeType: S
+          - AttributeName: userId
+            AttributeType: S
         KeySchema:
           - AttributeName: todoId
             KeyType: HASH
+          - AttributeName: userId
+            KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
         # StreamSpecification:
         #   StreamViewType: NEW_TODO
